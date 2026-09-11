@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+/* Hospware Modern Design System - Radix UI Enhanced */
+:root {
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Custom Color Tokens */
+  --hw-bg-app: #090d16;
+  --hw-bg-surface: #0f172a;
+  --hw-bg-card: rgba(15, 23, 42, 0.75);
+  --hw-bg-card-hover: rgba(30, 41, 59, 0.85);
+
+  --hw-border-subtle: rgba(255, 255, 255, 0.08);
+  --hw-border-focus: #6366f1;
+
+  /* Room & Hospitality Status Tokens */
+  --status-clean-color: #10b981;
+  --status-clean-bg: rgba(16, 185, 129, 0.12);
+  --status-clean-border: rgba(16, 185, 129, 0.3);
+
+  --status-dirty-color: #f43f5e;
+  --status-dirty-bg: rgba(244, 63, 94, 0.12);
+  --status-dirty-border: rgba(244, 63, 94, 0.3);
+
+  --status-cleaning-color: #f59e0b;
+  --status-cleaning-bg: rgba(245, 158, 11, 0.12);
+  --status-cleaning-border: rgba(245, 158, 11, 0.3);
+
+  --status-occupied-color: #8b5cf6;
+  --status-occupied-bg: rgba(139, 92, 246, 0.12);
+  --status-occupied-border: rgba(139, 92, 246, 0.3);
+
+  --status-inspected-color: #38bdf8;
+  --status-inspected-bg: rgba(56, 189, 248, 0.12);
+  --status-inspected-border: rgba(56, 189, 248, 0.3);
+
+  --status-out-of-service-color: #94a3b8;
+  --status-out-of-service-bg: rgba(148, 163, 184, 0.12);
+  --status-out-of-service-border: rgba(148, 163, 184, 0.3);
+
+  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--hw-bg-app);
+  color: #f8fafc;
+  line-height: 1.5;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Glassmorphism helpers */
+.glass-panel {
+  background: var(--hw-bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--hw-border-subtle);
+  border-radius: 12px;
+  box-shadow: var(--shadow-card);
+}
+
+.glass-nav {
+  background: rgba(9, 13, 22, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--hw-border-subtle);
+}
+
+/* Room Card Transition & Hover */
+.room-card {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  border: 1px solid var(--hw-border-subtle);
+}
+
+.room-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Thermal receipt paper preview effect */
+.receipt-paper {
+  background: #ffffff;
+  color: #1e293b;
+  font-family: 'Courier New', Courier, monospace;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+/* Keypad button touch animation */
+.keypad-btn {
+  transition: transform 0.1s ease, background-color 0.15s ease;
+}
+.keypad-btn:active {
+  transform: scale(0.95);
+}

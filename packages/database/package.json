@@ -1,0 +1,31 @@
+{
+  "name": "@hospware/database",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "test": "node --test dist/**/*.test.js || vitest run"
+  },
+  "dependencies": {
+    "@hospware/core-domain": "*",
+    "drizzle-orm": "^0.39.3",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@hospware/tsconfig": "*",
+    "@types/node": "^22.13.9",
+    "@types/uuid": "^10.0.0",
+    "better-sqlite3": "^11.8.1",
+    "drizzle-kit": "^0.30.4",
+    "tsup": "^8.4.0",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.8"
+  }
+}
