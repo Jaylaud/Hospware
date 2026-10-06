@@ -1,25 +1,24 @@
 {
-  "name": "hospware-pms",
-  "version": "1.0.0",
+  "name": "hospware",
+  "version": "0.1.0",
   "private": true,
-  "description": "Offline-First Property Management System for Hotels & Property Managers",
+  "description": "Hospware - Offline-First Hotel & Property Management Platform",
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
     "dev": "turbo run dev",
-    "test": "turbo run test",
+    "build": "turbo run build",
     "lint": "turbo run lint",
-    "clean": "turbo run clean && rm -rf node_modules"
+    "clean": "turbo run clean"
   },
+  "packageManager": "npm@11.12.1",
   "devDependencies": {
     "turbo": "^2.4.4",
-    "typescript": "^5.8.2"
+    "typescript": "^5.7.3"
   },
   "engines": {
     "node": ">=20.0.0"
-  },
-  "packageManager": "npm@11.12.1"
+  }
 }
