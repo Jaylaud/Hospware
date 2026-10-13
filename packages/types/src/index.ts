@@ -20,9 +20,27 @@ export interface User extends BaseEntity {
   role: UserRole;
   pinCode?: string; // 4-6 digit PIN for fast terminal switching
   isActive: boolean;
+  mustChangePin?: boolean;
+}
+
+// User Invitations
+export type UserInvitationStatus = 'pending' | 'accepted' | 'expired' | 'revoked';
+
+export interface UserInvitation extends BaseEntity {
+  hotelId: string;
+  email: string;
+  role: UserRole;
+  token: string;
+  invitedByUserId?: string;
+  expiresAt: string;
+  acceptedAt?: string | null;
+  status: UserInvitationStatus;
 }
 
 // Property & Hotel Details
+export type HotelSubscriptionStatus = 'trialing' | 'active' | 'past_due' | 'canceled';
+export type HotelSubscriptionTier = 'starter' | 'standard' | 'premium';
+
 export interface Hotel extends BaseEntity {
   name: string;
   code: string;
@@ -32,6 +50,11 @@ export interface Hotel extends BaseEntity {
   phone?: string;
   email?: string;
   taxNumber?: string;
+  licenseKey?: string;
+  cloudTenantId?: string;
+  subscriptionStatus?: HotelSubscriptionStatus;
+  subscriptionTier?: HotelSubscriptionTier;
+  maxRooms?: number;
   settings?: Record<string, unknown>;
 }
 

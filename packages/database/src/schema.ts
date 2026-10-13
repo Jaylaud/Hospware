@@ -21,6 +21,18 @@ export const hotels = sqliteTable('hotels', {
   phone: text('phone'),
   email: text('email'),
   taxNumber: text('tax_number'),
+  
+  // Licensing & Cloud Subscription Link
+  licenseKey: text('license_key'),
+  cloudTenantId: text('cloud_tenant_id'), // Connects local hub to cloud SaaS tenant
+  subscriptionStatus: text('subscription_status', { 
+    enum: ['trialing', 'active', 'past_due', 'canceled'] 
+  }).default('trialing'),
+  subscriptionTier: text('subscription_tier', { 
+    enum: ['starter', 'standard', 'premium'] 
+  }).default('starter'),
+  maxRooms: integer('max_rooms').default(30),
+
   settingsJson: text('settings_json'), // JSON blob for flexible config
 });
 
@@ -35,6 +47,22 @@ export const users = sqliteTable('users', {
   pinCode: text('pin_code'), // Fast PIN switch for POS / reception terminals
   role: text('role', { enum: ['owner', 'manager', 'receptionist', 'housekeeper', 'waiter', 'kitchen'] }).notNull(),
   isActive: integer('is_active', { mode: 'boolean' }).notNull().default(true),
+  mustChangePin: integer('must_change_pin', { mode: 'boolean' }).notNull().default(false),
+});
+
+// 2b. User Invitations
+export const userInvitations = sqliteTable('user_invitations', {
+  ...baseColumns,
+  hotelId: text('hotel_id').notNull().references(() => hotels.id),
+  email: text('email').notNull(),
+  role: text('role', { enum: ['owner', 'manager', 'receptionist', 'housekeeper', 'waiter', 'kitchen'] }).notNull(),
+  token: text('token').notNull().unique(),
+  invitedByUserId: text('invited_by_user_id').references(() => users.id),
+  expiresAt: text('expires_at').notNull(),
+  acceptedAt: text('accepted_at'),
+  status: text('status', { enum: ['pending', 'accepted', 'expired', 'revoked'] })
+    .notNull()
+    .default('pending'),
 });
 
 // 3. Room Types
