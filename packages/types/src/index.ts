@@ -55,6 +55,7 @@ export interface Hotel extends BaseEntity {
   subscriptionStatus?: HotelSubscriptionStatus;
   subscriptionTier?: HotelSubscriptionTier;
   maxRooms?: number;
+  activeModules?: string[];
   settings?: Record<string, unknown>;
 }
 
@@ -176,14 +177,55 @@ export interface RestaurantOrderItem {
   notes?: string;
 }
 
-// Sync Log / Mutation Protocol
-export interface SyncChangeRecord {
+// Receipt & Invoicing
+export interface ReceiptItem {
   id: string;
-  table: string;
-  recordId: string;
-  operation: 'INSERT' | 'UPDATE' | 'DELETE';
-  data: Record<string, unknown>;
-  timestamp: string;
-  nodeId: string; // ID of the machine/terminal that made the change
-  syncedToCloud: boolean;
+  description: string;
+  quantity: number;
+  unitPrice: number;
+  total: number;
 }
+
+export interface Receipt extends BaseEntity {
+  hotelId: string;
+  paymentId: string;
+  reservationId?: string | null;
+  receiptNumber: string;
+  guestName: string;
+  roomNumber?: string;
+  lineItems: ReceiptItem[];
+  subtotal: number;
+  taxAmount: number;
+  totalAmount: number;
+  currency: string;
+  paymentMethod: 'cash' | 'card' | 'bank_transfer' | 'mobile_money' | 'other';
+  issuedAt: string;
+}
+
+// Owner Subscription Invoices & Billing
+export interface SubscriptionInvoice extends BaseEntity {
+  hotelId: string;
+  invoiceNumber: string;
+  amount: number;
+  currency: string;
+  status: 'paid' | 'pending' | 'failed';
+  planTier: HotelSubscriptionTier;
+  periodStart: string;
+  periodEnd: string;
+  paymentMethod: string;
+  pdfUrl?: string;
+}
+
+// Realtime Activity & Notifications (Owner alert stream)
+export type ActivityEventType = 'check_in' | 'check_out' | 'payment' | 'cleaning_done' | 'room_issue' | 'alert';
+
+export interface ActivityNotification extends BaseEntity {
+  hotelId: string;
+  actorName: string;
+  eventType: ActivityEventType;
+  title: string;
+  description: string;
+  metadata?: Record<string, unknown>;
+  isRead: boolean;
+}
+

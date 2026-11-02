@@ -1,19 +1,15 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
+const host = process.env.TAURI_DEV_HOST;
+
 export default defineConfig({
   plugins: [react()],
+  clearScreen: false,
   server: {
     port: 3000,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:4000',
-        changeOrigin: true,
-      },
-      '/ws': {
-        target: 'ws://localhost:4000',
-        ws: true,
-      },
-    },
+    strictPort: true,
+    host: host || false,
   },
+  envPrefix: ['VITE_', 'TAURI_ENV_*'],
 });
