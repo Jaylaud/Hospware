@@ -1509,20 +1509,21 @@ export default function App() {
                             {res.bookingRef} • {res.source}
                           </span>
                           <span
-                            className={`room-status-badge ${res.status === 'confirmed'
+                            className={`room-status-badge ${
+                              res.status === 'confirmed'
                                 ? 'reserved'
                                 : res.status === 'checked_in'
-                                  ? 'occupied'
-                                  : 'dirty'
-                              }`}
+                                ? 'occupied'
+                                : 'dirty'
+                            }`}
                           >
                             {res.status === 'confirmed'
                               ? isToday
                                 ? 'Arriving Today'
                                 : 'Confirmed'
                               : res.status === 'checked_in'
-                                ? 'Checked In'
-                                : 'Cancelled'}
+                              ? 'Checked In'
+                              : 'Cancelled'}
                           </span>
                         </Flex>
 
